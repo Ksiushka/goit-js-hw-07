@@ -5,37 +5,52 @@ const imagesContainer = document.querySelector(".gallery");
 const imagesMarkup = createPictureGallery(galleryItems);
 imagesContainer.insertAdjacentHTML("beforeend", imagesMarkup);
 
-// const list = document.querySelector('.gallery');
-// const markup = galleryItems.map(url => `<img src="${url}" loading="lazy" alt="pic" width="300"></img>`);
-// list.innerHTML = markup.join('');
+document.querySelectorAll(".gallery__image").forEach((elem) => {
+    elem.addEventListener('click', () => onImageClick(elem));
+    //  elem.preventDefault()
+})
+
+// function onClick(evt) {
+//     evt.preventDefault()
+// }
+
+function onImageClick(elem) {  
+    // elem.preventDefault();
+    const instance = basicLightbox.create(`<img src="${elem.dataset.source}" />`, { closable: true });
+    instance.show(() => {
+        window.addEventListener('keydown', (event) => {
+            // event.preventDefault()
+        console.log("key pressed: " + event.key)
+            if (event.key === 'Escape') {
+                instance.close(() => {
+                    // window.removeEventListener()
+                })
+            }        
+        })
+    })    
+};
 
 function createPictureGallery(galleryItems) {
     return galleryItems.map(({ preview, original, description }) => {
         return `<div class="gallery__item">
-            <a class="gallery__link" href="${original}">
+             <a class="gallery__link" href="${original}">
                 <img 
                     class="gallery__image"
                     src="${preview}"
                     data-source="${original}"
                     alt="${description}"
                 />
-            </a>
+             </a>
         </div>`;
     }).join("");
+    
 }
-console.log(imagesMarkup);
 
-const instance = basicLightbox.create(`
-	<h1>Not closable</h1>
-	<p>It's not possible to close this lightbox with a click.</p>
-`, {
-	closable: false
-})
 
-// const gallery = document.querySelector('.gallery');
-// gallery.addEventListener("click", imagesGallery);
 
-// console.log(gallery);
-// const listWithId = document.querySelector('#categories');
-// console.log('Number of categories:', listWithId.children.length);
+
+
+
+
+
 
