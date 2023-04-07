@@ -18,13 +18,29 @@ imagesContainer.addEventListener('click', onClick)
 
 function onClick(evt) {
     evt.preventDefault()
-    if (!evt.target.classList) {
-        return;
-    }
+    // const { target } = evt;
+    // if (!target.classList.contains("gallery__item")) {
+    //     return;
+    // }
+    const modalPct =
+    target.dataset.modalPct ?? target.closest(".gallery__item").dataset.modalPct;
+
+    const currentItem = galleryItems.find(({ original }) => original === (modalPct));
+
+    const instance = basicLightbox.create(
+    `<div>
+    <img src="${currentItem.original}" />
+    </div>`, { closable: true });
+    instance.show();
 }
+
+
     
+
+
+
 // const imagesContainer = document.querySelector(".gallery");
- // const imagesMarkup = createPictureGallery(galleryItems);
+//  const imagesMarkup = createPictureGallery(galleryItems);
 // imagesContainer.insertAdjacentHTML("beforeend", imagesMarkup);
 
 // document.querySelectorAll(".gallery__image").forEach((elem) => {
@@ -37,7 +53,7 @@ function onClick(evt) {
 //     const instance = basicLightbox.create(`<img src="${elem.dataset.source}" />`, { closable: true });
 //     instance.show(() => {
 //         window.addEventListener('keydown', (event) => {
-//             // event.preventDefault()
+//            
 //         console.log("key pressed: " + event.key)
 //             if (event.key === 'Escape') {
 //                 instance.close(() => {
