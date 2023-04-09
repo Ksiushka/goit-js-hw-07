@@ -18,14 +18,14 @@ imagesContainer.addEventListener('click', onClick)
 
 function onClick(evt) {
     evt.preventDefault()
-    // const { target } = evt;
-    // if (!target.classList.contains("gallery__item")) {
-    //     return;
-    // }
-    const modalPct =
-    target.dataset.modalPct ?? target.closest(".gallery__item").dataset.modalPct;
+   if (currentTarget !== img) {
+        return;
+    }
+    
+    // const modalPct =
+    // currentTarget.modalPct ?? currentTarget.closest("img").dataset.modalPct;
 
-    const currentItem = galleryItems.find(({ original }) => original === (modalPct));
+    const currentItem = galleryItems.find(({ original }) => original === (currentTarget));
 
     const instance = basicLightbox.create(
     `<div>
