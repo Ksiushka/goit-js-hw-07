@@ -22,3 +22,18 @@ function createPictureGallery(galleryItems) {
     
 }
 
+imagesContainer.insertAdjacentHTML("beforeend", imagesMarkup);
+imagesContainer.addEventListener('click', onClick);
+
+
+function onClick(evt) {
+    evt.preventDefault()
+ new SimpleLightbox('.gallery a', {  captionsData: 'alt',  captionDelay: 250,}); 
+
+gallery.on('show.simplelightbox', function () {
+	
+})
+};
+
+
+

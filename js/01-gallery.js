@@ -18,18 +18,15 @@ imagesContainer.addEventListener('click', onClick)
 
 function onClick(evt) {
     evt.preventDefault()
-   if (currentTarget !== img) {
+
+    const currentItem = evt.target.closest("img").dataset.source;
+    if (!currentItem) {
         return;
     }
-    
-    // const modalPct =
-    // currentTarget.modalPct ?? currentTarget.closest("img").dataset.modalPct;
-
-    const currentItem = galleryItems.find(({ original }) => original === (currentTarget));
 
     const instance = basicLightbox.create(
     `<div>
-    <img src="${currentItem.original}" />
+    <img src="${currentItem}" width="300" />
     </div>`, { closable: true });
     instance.show();
 }
