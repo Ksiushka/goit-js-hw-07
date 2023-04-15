@@ -17,23 +17,29 @@ imagesContainer.insertAdjacentHTML("beforeend", imagesMarkup.join(''));
 imagesContainer.addEventListener('click', onClick)
 
 function onClick(evt) {
-    evt.preventDefault()
+  evt.preventDefault()
+  
+  const currentItem = evt.target
 
-    const currentItem = evt.target.closest("img").dataset.source;
-    if (!currentItem) {
-        return;
+    if (currentItem.nodeName !== 'IMG') {
+      return;
     }
 
     const instance = basicLightbox.create(
     `<div>
-    <img src="${currentItem}" width="300" />
-    </div>`, { closable: true });
+    <img src="${currentItem.dataset.source}" width="800" height="600"/>
+    </div>`);
     instance.show();
 }
 
 
     
-
+//  const currentItem = evt.target.closest("img").dataset.source;
+//     if (!currentItem) {
+//         return;
+//     }
+//  { closable: true }
+// почему не читает dataset?
 
 
 // const imagesContainer = document.querySelector(".gallery");
